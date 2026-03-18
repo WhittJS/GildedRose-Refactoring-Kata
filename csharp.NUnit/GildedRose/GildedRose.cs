@@ -17,12 +17,9 @@ public class GildedRose
         {
             if (t.Name != ItemNames.AgedBrie && t.Name != ItemNames.BackstagePasses)
             {
-                if (t.Quality > 0)
+                if (t.Quality > 0 && t.Name != ItemNames.Sulfuras)
                 {
-                    if (t.Name != ItemNames.Sulfuras)
-                    {
-                        t.Quality -= 1;
-                    }
+                    t.Quality -= 1;
                 }
             }
             else
@@ -33,20 +30,14 @@ public class GildedRose
 
                     if (t.Name == ItemNames.BackstagePasses)
                     {
-                        if (t.SellIn < 11)
+                        if (t.SellIn < 11 && t.Quality < 50)
                         {
-                            if (t.Quality < 50)
-                            {
-                                t.Quality += 1;
-                            }
+                            t.Quality += 1;
                         }
 
-                        if (t.SellIn < 6)
+                        if (t.SellIn < 6 && t.Quality < 50)
                         {
-                            if (t.Quality < 50)
-                            {
-                                t.Quality += 1;
-                            }
+                            t.Quality += 1;
                         }
                     }
                 }
@@ -63,12 +54,9 @@ public class GildedRose
                 {
                     if (t.Name != ItemNames.BackstagePasses)
                     {
-                        if (t.Quality > 0)
+                        if (t.Quality > 0 && t.Name != ItemNames.Sulfuras)
                         {
-                            if (t.Name != ItemNames.Sulfuras)
-                            {
-                                t.Quality -= 1;
-                            }
+                            t.Quality -= 1;
                         }
                     }
                     else
