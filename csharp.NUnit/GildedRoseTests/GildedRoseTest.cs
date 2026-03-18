@@ -171,6 +171,16 @@ public class GildedRoseTest
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(50));
     }
+    
+    [Test]
+    public void UpdateQuality_WhenBackStagePassLessThanTenDays_QualityCapsAtFifty()
+    {
+        var items = new List<Item>
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 9, Quality = 49 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(50));
+    }
 
     #endregion
 }
