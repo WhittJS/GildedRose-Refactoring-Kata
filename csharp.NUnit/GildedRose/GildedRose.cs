@@ -15,11 +15,11 @@ public class GildedRose
     {
         foreach (var t in Items)
         {
-            if (t.Name != "Aged Brie" && t.Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (t.Name != ItemNames.AgedBrie && t.Name != ItemNames.BackstagePasses)
             {
                 if (t.Quality > 0)
                 {
-                    if (t.Name != "Sulfuras, Hand of Ragnaros")
+                    if (t.Name != ItemNames.Sulfuras)
                     {
                         t.Quality -= 1;
                     }
@@ -31,7 +31,7 @@ public class GildedRose
                 {
                     t.Quality += 1;
 
-                    if (t.Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (t.Name == ItemNames.BackstagePasses)
                     {
                         if (t.SellIn < 11)
                         {
@@ -52,20 +52,20 @@ public class GildedRose
                 }
             }
 
-            if (t.Name != "Sulfuras, Hand of Ragnaros")
+            if (t.Name != ItemNames.Sulfuras)
             {
                 t.SellIn -= 1;
             }
 
             if (t.SellIn < 0)
             {
-                if (t.Name != "Aged Brie")
+                if (t.Name != ItemNames.AgedBrie)
                 {
-                    if (t.Name != "Backstage passes to a TAFKAL80ETC concert")
+                    if (t.Name != ItemNames.BackstagePasses)
                     {
                         if (t.Quality > 0)
                         {
-                            if (t.Name != "Sulfuras, Hand of Ragnaros")
+                            if (t.Name != ItemNames.Sulfuras)
                             {
                                 t.Quality -= 1;
                             }

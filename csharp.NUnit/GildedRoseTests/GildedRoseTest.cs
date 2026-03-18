@@ -60,7 +60,7 @@ public class GildedRoseTest
     [Test]
     public void UpdateQuality_WhenAgedBrieBeforeSellDate_QualityIncreasesByOne()
     {
-        var items = new List<Item> { new() { Name = "Aged Brie", SellIn = 1, Quality = 8 } };
+        var items = new List<Item> { new() { Name = ItemNames.AgedBrie, SellIn = 1, Quality = 8 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(9));
@@ -69,7 +69,7 @@ public class GildedRoseTest
     [Test]
     public void UpdateQuality_WhenAgedBrieAfterSellDate_QualityIncreasesByTwo()
     {
-        var items = new List<Item> { new() { Name = "Aged Brie", SellIn = 0, Quality = 8 } };
+        var items = new List<Item> { new() { Name = ItemNames.AgedBrie, SellIn = 0, Quality = 8 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(10));
@@ -78,7 +78,7 @@ public class GildedRoseTest
     [Test]
     public void UpdateQuality_WhenAgedBrieMaxQuality_QualityDoesNotIncrease()
     {
-        var items = new List<Item> { new() { Name = "Aged Brie", SellIn = 0, Quality = 50 } };
+        var items = new List<Item> { new() { Name = ItemNames.AgedBrie, SellIn = 0, Quality = 50 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(50));
@@ -91,7 +91,7 @@ public class GildedRoseTest
     [Test]
     public void UpdateQuality_WhenSulfuras_IsNeverAltered()
     {
-        var items = new List<Item> { new() { Name = "Sulfuras, Hand of Ragnaros", SellIn = 5, Quality = 80 } };
+        var items = new List<Item> { new() { Name = ItemNames.Sulfuras, SellIn = 5, Quality = 80 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(80));
@@ -106,7 +106,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassExpired_QualityZero()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = -1, Quality = 40 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = -1, Quality = 40 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(0));
@@ -116,7 +116,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassGreaterThanTenDays_QualityIncreasesByOne()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 40 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 15, Quality = 40 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(41));
@@ -126,7 +126,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassExactlyTenDays_QualityIncreasesByTwo()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 40 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 10, Quality = 40 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(42));
@@ -136,7 +136,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassLessThanTenDays_QualityIncreasesByTwo()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 9, Quality = 40 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 9, Quality = 40 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(42));
@@ -146,7 +146,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassExactlyFiveDays_QualityIncreasesByThree()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 40 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 5, Quality = 40 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(43));
@@ -156,7 +156,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassLessThanFiveDays_QualityIncreasesByThree()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 40 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 4, Quality = 40 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(43));
@@ -166,7 +166,7 @@ public class GildedRoseTest
     public void UpdateQuality_WhenBackStagePassLessThanFiveDays_QualityCapsAtFifty()
     {
         var items = new List<Item>
-            { new() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 4, Quality = 49 } };
+            { new() { Name = ItemNames.BackstagePasses, SellIn = 4, Quality = 49 } };
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(50));
