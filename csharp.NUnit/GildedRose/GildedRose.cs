@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace GildedRoseKata;
 
@@ -15,65 +16,49 @@ public class GildedRose
     {
         foreach (var t in _items)
         {
-            if (t.Name == ItemNames.Sulfuras)
+            switch (t.Name)
             {
-                continue;
-            }
-
-            if (t.Name != ItemNames.AgedBrie && t.Name != ItemNames.BackstagePasses)
-            {
-                if (t.Quality > 0)
-                {
-                    t.Quality -= 1;
-                }
-            }
-            else
-            {
-                if (t.Quality < 50)
-                {
-                    t.Quality += 1;
-
-                    if (t.Name == ItemNames.BackstagePasses)
-                    {
-                        if (t.SellIn < 11 && t.Quality < 50)
-                        {
-                            t.Quality += 1;
-                        }
-
-                        if (t.SellIn < 6 && t.Quality < 50)
-                        {
-                            t.Quality += 1;
-                        }
-                    }
-                }
-            }
-
-            t.SellIn -= 1;
-
-            if (t.SellIn < 0)
-            {
-                if (t.Name != ItemNames.AgedBrie)
-                {
-                    if (t.Name != ItemNames.BackstagePasses)
-                    {
-                        if (t.Quality > 0)
-                        {
-                            t.Quality -= 1;
-                        }
-                    }
-                    else
-                    {
-                        t.Quality = 0;
-                    }
-                }
-                else
-                {
-                    if (t.Quality < 50)
-                    {
-                        t.Quality += 1;
-                    }
-                }
+                case ItemNames.Sulfuras:
+                    continue;
+                case ItemNames.AgedBrie:
+                    HandleBrie(t);
+                    break;
+                case ItemNames.BackstagePasses:
+                    HandleBackstagePasses(t);
+                    break;
+                default:
+                    t.Quality = Math.Max(0, t.Quality - 1);
+                    t.SellIn -= 1;
+                    if (t.SellIn >= 0) continue;
+                    t.Quality = Math.Max(0, t.Quality - 1);
+                    break;
             }
         }
+    }
+
+    private static void HandleBackstagePasses(Item t)
+    {
+        t.Quality = Math.Min(t.Quality + 1, 50);
+        if (t.SellIn < 11)
+        {
+            t.Quality = Math.Min(t.Quality + 1, 50);
+        }
+
+        if (t.SellIn < 6)
+        {
+            t.Quality = Math.Min(t.Quality + 1, 50);
+        }
+
+        t.SellIn -= 1;
+        if (t.SellIn >= 0) return;
+        t.Quality = 0;
+    }
+
+    private static void HandleBrie(Item t)
+    {
+        t.Quality = Math.Min(t.Quality + 1, 50);
+        t.SellIn -= 1;
+        if (t.SellIn >= 0) return;
+        t.Quality = Math.Min(t.Quality + 1, 50);
     }
 }
