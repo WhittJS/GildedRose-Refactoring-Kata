@@ -15,9 +15,14 @@ public class GildedRose
     {
         foreach (var t in _items)
         {
+            if (t.Name == ItemNames.Sulfuras)
+            {
+                continue;
+            }
+
             if (t.Name != ItemNames.AgedBrie && t.Name != ItemNames.BackstagePasses)
             {
-                if (t.Quality > 0 && t.Name != ItemNames.Sulfuras)
+                if (t.Quality > 0)
                 {
                     t.Quality -= 1;
                 }
@@ -43,10 +48,7 @@ public class GildedRose
                 }
             }
 
-            if (t.Name != ItemNames.Sulfuras)
-            {
-                t.SellIn -= 1;
-            }
+            t.SellIn -= 1;
 
             if (t.SellIn < 0)
             {
@@ -54,7 +56,7 @@ public class GildedRose
                 {
                     if (t.Name != ItemNames.BackstagePasses)
                     {
-                        if (t.Quality > 0 && t.Name != ItemNames.Sulfuras)
+                        if (t.Quality > 0)
                         {
                             t.Quality -= 1;
                         }
