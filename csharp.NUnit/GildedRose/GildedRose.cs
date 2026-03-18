@@ -26,6 +26,9 @@ public class GildedRose
                 case ItemNames.BackstagePasses:
                     HandleBackstagePasses(t);
                     break;
+                case ItemNames.Conjured:
+                    HandleConjured(t);
+                    break;
                 default:
                     t.Quality = Math.Max(0, t.Quality - 1);
                     t.SellIn -= 1;
@@ -34,6 +37,14 @@ public class GildedRose
                     break;
             }
         }
+    }
+
+    private static void HandleConjured(Item t)
+    {
+        t.Quality = Math.Max(0, t.Quality - 2);
+        t.SellIn -= 1;
+        if (t.SellIn >= 0) return;
+        t.Quality = Math.Max(0, t.Quality - 2);
     }
 
     private static void HandleBackstagePasses(Item t)

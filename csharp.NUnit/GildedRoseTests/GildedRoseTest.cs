@@ -171,7 +171,7 @@ public class GildedRoseTest
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(50));
     }
-    
+
     [Test]
     public void UpdateQuality_WhenBackStagePassLessThanTenDays_QualityCapsAtFifty()
     {
@@ -180,6 +180,55 @@ public class GildedRoseTest
         var app = new GildedRose(items);
         app.UpdateQuality();
         Assert.That(items[0].Quality, Is.EqualTo(50));
+    }
+
+    #endregion
+
+    #region Conjured Items
+
+    [Test]
+    public void UpdateQuality_WhenConjured_QualityDecreasesByTwo()
+    {
+        var items = new List<Item> { new() { Name = ItemNames.Conjured, SellIn = 5, Quality = 10 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(8));
+    }
+
+    [Test]
+    public void UpdateQuality_WhenConjured_SellInDecreasesByOne()
+    {
+        var items = new List<Item> { new() { Name = ItemNames.Conjured, SellIn = 5, Quality = 10 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].SellIn, Is.EqualTo(4));
+    }
+
+    [Test]
+    public void UpdateQuality_WhenConjuredAfterSellDate_QualityDecreasesByFour()
+    {
+        var items = new List<Item> { new() { Name = ItemNames.Conjured, SellIn = 0, Quality = 10 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(6));
+    }
+
+    [Test]
+    public void UpdateQuality_WhenConjured_QualityDoesNotGoBelowZero()
+    {
+        var items = new List<Item> { new() { Name = ItemNames.Conjured, SellIn = 5, Quality = 1 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(0));
+    }
+
+    [Test]
+    public void UpdateQuality_WhenConjuredAfterSellDate_QualityDoesNotGoBelowZero()
+    {
+        var items = new List<Item> { new() { Name = ItemNames.Conjured, SellIn = 0, Quality = 3 } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        Assert.That(items[0].Quality, Is.EqualTo(0));
     }
 
     #endregion
